@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iQAS - DIY Night Lamp Product</title>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://www.1001fonts.com/shooting-star-personal-use-font.html" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        @font-face {
+            font-family: Shooting;
+            src: url("https://www.1001fonts.com/shooting-star-personal-use-font.html");
+        }
+
+        body h1,h2,h3,h4,h5{
+            font-family: shooting;
+        }
+
+        body {
+            font-family: 'Josefin Sans', sans-serif;
+            background: linear-gradient(135deg, #0c0c1d 0%, #1a1a2e 25%, #16213e 50%, #0f0f23 75%, #0a0a1f 100%);
+            color: #e6e6fa;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated stars background */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 0;
+            background: rgba(10, 10, 31, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ff6b9d;
+            text-shadow: 0 0 20px rgba(255, 107, 157, 0.5);
+            /* This will be "Shooting Star" font */
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: #e6e6fa;
+            text-decoration: none;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: #ff6b9d;
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            color: #ff6b9d;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg,#ff6b9d, #c471ed);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            padding: 2rem 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .product-hero {
+            text-align: center;
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ff6b9d, #c471ed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 107, 157, 0.3);
+            /* This will be "Shooting Star" font */
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #b8b8d1;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        /* Video Section */
+        .video-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 3rem;
+            margin: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(255, 107, 157, 0.1), transparent);
+            animation: rotate 10s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ff6b9d;
+            margin-bottom: 2rem;
+            text-align: center;
+            /* This will be "Shooting Star" font */
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 450px;
+            background: linear-gradient(45deg, #1a1a2e, #16213e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .play-button {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 107, 157, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3);
+            margin-bottom: 1rem;
+        }
+
+        .play-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.4);
+        }
+
+        .video-title {
+            font-size: 1.5rem;
+            color: #e6e6fa;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .video-description {
+            color: #b8b8d1;
+            font-weight: 300;
+            text-align: center;
+            max-width: 400px;
+        }
+
+        /* Components Section */
+        .components-section {
+            padding: 4rem 0;
+        }
+
+        .components-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .component-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .component-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(196, 113, 237, 0.1), transparent);
+            animation: rotate 15s linear infinite;
+            z-index: -1;
+        }
+
+        .component-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 107, 157, 0.2);
+        }
+
+        .component-image {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(45deg, #ff6b9d, #c471ed);
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .component-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3), transparent);
+        }
+
+        .component-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #c471ed;
+            font-weight: 600;
+        }
+
+        .component-card p {
+            color: #b8b8d1;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            padding: 4rem 0;
+            background: rgba(255, 255, 255, 0.03);
+            margin: 2rem 0;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(45deg, #1a1a2e, #16213e);
+            height: 200px;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(255, 107, 157, 0.3);
+        }
+
+        .gallery-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #ff6b9d;
+            position: relative;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 107, 157, 0.8), rgba(196, 113, 237, 0.8));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 4rem 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 30px;
+            margin: 4rem 0;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ff6b9d;
+            margin-bottom: 1rem;
+            /* This will be "Shooting Star" font */
+        }
+
+        .cta-text {
+            font-size: 1.2rem;
+            color: #b8b8d1;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(45deg, #ff6b9d, #c471ed);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            border: 2px solid #ff6b9d;
+            color: #ff6b9d;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #0a0a1f 0%, #1a1a2e 100%);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 3rem 0 1rem;
+            position: relative;
+            z-index: 10;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .footer.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #ff6b9d;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            /* This will be "Shooting Star" font */
+        }
+
+        .footer-section h4 {
+            color: #c471ed;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .footer-section p {
+            color: #b8b8d1;
+            font-weight: 300;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .social-link:hover {
+            background: rgba(255, 107, 157, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 107, 157, 0.3);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin: 0.5rem 0;
+        }
+
+        .footer-links a {
+            color: #b8b8d1;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 300;
+        }
+
+        .footer-links a:hover {
+            color: #ff6b9d;
+            transform: translateX(5px);
+        }
+
+        .contact-info p {
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .newsletter {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #e6e6fa;
+            font-family: 'Josefin Sans', sans-serif;
+            backdrop-filter: blur(10px);
+        }
+
+        .newsletter-input::placeholder {
+            color: #b8b8d1;
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            border-color: #ff6b9d;
+            box-shadow: 0 0 15px rgba(255, 107, 157, 0.3);
+        }
+
+        .newsletter-btn {
+            padding: 0.8rem 1.2rem;
+            background: linear-gradient(45deg, #ff6b9d, #c471ed);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 107, 157, 0.3);
+        }
+
+        .newsletter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 157, 0.4);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #b8b8d1;
+            font-weight: 300;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .nav-menu {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .video-placeholder {
+                height: 300px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+                /* Scroll to Top Button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #ff6b9d, #c471ed);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            opacity: 0;
+            transform: translateY(100px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scroll-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.4);
+        }
+
+        .scroll-to-top::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            border-radius: 50%;
+            transform: scale(0);
+            transition: transform 0.3s ease;
+        }
+
+        .scroll-to-top:hover::before {
+            transform: scale(1);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .scroll-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
+        }
+
+        .gallery-placeholder video.gallery-video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Animated Stars -->
+    <div class="stars"></div>
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop">↑</button>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">iQAS</div>
+            <ul class="nav-menu">
+                <li><a href="home.html" class="nav-link">Home</a></li>
+                <li><a href="product.html" class="nav-link active">Product</a></li>
+                <li><a href="shop.html" class="nav-link">Shop</a></li>
+                <li><a href="about.html" class="nav-link">About Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="product-hero">
+            <div class="container">
+                <h1 class="hero-title">✨ Creating Noctelle Journey ✨</h1>
+                <p class="hero-subtitle">At iQAS, we offer enchanting DIY night lamps made from recycled materials, empowering users to create personalized, eco-conscious lighting that brings the magic of the night sky into their own space.</p>
+            </div>
+        </section>
+
+        <!-- Video Section -->
+        <section class="video-section">
+            <div class="container">
+                <h2 class="section-title">🎬 Commercial Video</h2>
+                <div class="video-container">
+                    <div class="video-placeholder">
+                        <div class="play-button">▶️</div>
+                        <div class="video-title">DIY Night Lamp Use Guide</div>
+                        <p class="video-description">Watch our video on how to use your beautiful night lamp in just 5 minutes!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Components Section -->
+        <section class="components-section">
+            <div class="container">
+                <h2 class="section-title"> What's Inside The Magic</h2>
+                <div class="components-grid">
+                    <div class="component-card">
+                        <div class="component-image"><img src="recycle.png" width=100px></div>
+                        <h3>Recycled Materials</h3>
+                        <p>The lamp incorporates recycled materials such as plastic bottles and cardboard to promote sustainability and reduce waste.</p>
+                    </div>
+
+                    <div class="component-card">
+                        <div class="component-image"><img src="photo.png" width="150px"></div>
+                        <h3>Photo Resistor / Light Sensor</h3>
+                        <p>A light-sensitive semiconductor device whose resistance decreases when exposed to light.</p>
+                    </div>
+                    
+                    <div class="component-card">
+                        <div class="component-image"><img src="uno.png" width=100px></div>
+                        <h3>Arduino Uno One photoresistor</h3>
+                        <p>A photoresistor, also known as an LDR (Light Dependent Resistor), can be easily interfaced with an Arduino Uno to measure light intensity.</p>
+                    </div>
+                    
+                    <div class="component-card">
+                        <div class="component-image"><img src="10k.png" width=100px></div>
+                        <h3>10K Ohm resistor</h3>
+                        <p>Provides the exact resistance necessary for circuits to work smoothly.</p>
+                    </div>
+                    
+                    <div class="component-card">
+                        <div class="component-image"><img src="strip.png" alt="Light Strip" width=100px></div>
+                        <h3>High-Brightness LED Strip</h3>
+                        <p>To emit light like a lamp. 12V LED strip.</p>
+                    </div>
+                    
+                    <div class="component-card">
+                        <div class="component-image"><img src="breadboard.jpeg.png" alt="Breadboard" width=100px></div>
+                        <h3>Breadboard</h3>
+                        <p>A solderless electronic prototyping tool used to build and test circuits without soldering.</p>
+                    </div>
+                    
+                    <div class="component-card">
+                        <div class="component-image"><img src="adapter.png" width=100px></div>
+                        <h3>External Power Supply (12V Adapter or Battery Pack)</h3>
+                        <p>Powers the LED strip or multiple LEDs.</p>
+                    </div>
+                    <div class="component-card">
+                        <div class="component-image"><img src="jumper.png" width=100px></div>
+                        <h3>Jumper wire</h3>
+                        <p>A breadboard is a solderless device used for prototyping electronic circuits.</p>
+                    </div>
+
+                    <div class="component-card">
+                        <div class="component-image"><img src="npn.png" width=100px></div>
+                        <h3>NPN Transistor</h3>
+                        <p>Allows Arduino to control high-power LEDs safely.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="gallery-section">
+            <div class="container">
+                <h2 class="section-title">📸 Product Gallery</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder"><img src="1.jpeg" width=200px></div>
+                        <div class="gallery-overlay">Completed Lamp</div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder"><img src="2.jpeg" width=200px></div>
+                        <div class="gallery-overlay">When Not Lighten</div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder"><img src="3.jpeg" width=200px></div>
+                        <div class="gallery-overlay">Without coating</div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder"><img src="4..jpeg" width=200px></div>
+                        <div class="gallery-overlay">On Table</div>
+                    </div>
+                    <div class="gallery-item">
+                    <div class="gallery-placeholder">
+                        <video class="gallery-video"
+                            src="1.mp4"
+                            poster="thumbnail.jpg"
+                            muted
+                            loop
+                            playsinline
+                            preload="metadata">
+                        </video>
+                    </div>
+                    <div class="gallery-overlay"></div>
+                    </div>
+
+                    <div class="gallery-item">
+                    <div class="gallery-placeholder">
+                        <video class="gallery-video"
+                            src="2.mp4"
+                            poster="thumbnail.jpg"
+                            muted
+                            loop
+                            playsinline
+                            preload="metadata">
+                        </video>
+                    </div>
+                    <div class="gallery-overlay"></div>
+                    </div>
+
+                    <div class="gallery-item">
+                    <div class="gallery-placeholder">
+                        <video class="gallery-video"
+                            src="3.mp4"
+                            poster="thumbnail.jpg"
+                            muted
+                            loop
+                            playsinline
+                            preload="metadata">
+                        </video>
+                    </div>
+                    <div class="gallery-overlay"></div>
+                    </div>
+
+                    <div class="gallery-item">
+                    <div class="gallery-placeholder">
+                        <video class="gallery-video"
+                            src="4.mp4"
+                            poster="thumbnail.jpg"
+                            muted
+                            loop
+                            playsinline
+                            preload="metadata">
+                        </video>
+                    </div>
+                    <div class="gallery-overlay"></div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <h2 class="cta-title">Ready to Got Your Own Magic?</h2>
+                <p class="cta-text">Join thousands of happy customers who've already illuminated their spaces with our iQas Night Lamp!</p>
+                <div class="cta-buttons">
+                    <a href="shop.html" class="cta-button">🛒 Shop Now</a>
+                    <a href="about.html#contact-section" class="cta-button secondary">📱 Contact Us</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>iQAS</h3>
+                    <p>Creating magical moments with our DIY Night Lamp collection. Light up your world with creativity!</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">📧</a>
+                        <a href="#" class="social-link">📱</a>
+                        <a href="#" class="social-link">💬</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#product">Product</a></li>
+                        <li><a href="#shop">Shop</a></li>
+                        <li><a href="#about">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <div class="contact-info">
+                        <p>📧 hello@iqas.com</p>
+                        <p>📞 +60 12-345 6789</p>
+                        <p>📍 Kuala Lumpur, Malaysia</p>
+                        <p>🕒 Mon-Fri: 9AM-6PM</p>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Stay Connected</h4>
+                    <p>Subscribe for DIY tips and new lamp designs!</p>
+                    <div class="newsletter">
+                        <input type="email" placeholder="Your email address" class="newsletter-input">
+                        <button class="newsletter-btn">✨</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 iQAS. Made with 💜 by Syafeeqa, Amna & Qaseh</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Create animated stars
+        function createStars() {
+            const starsContainer = document.querySelector('.stars');
+            for (let i = 0; i < 30; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.width = Math.random() * 3 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.animationDelay = Math.random() * 2 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        createStars();
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(10, 10, 31, 0.95)';
+            } else {
+                navbar.style.background = 'rgba(10, 10, 31, 0.9)';
+            }
+        });
+
+        // Video play button click
+        document.querySelector('.play-button').addEventListener('click', function () {
+        const wrap = document.querySelector('.video-container');
+        wrap.innerHTML = `
+        <video controls autoplay width="100%" height="450" poster="thumbnail.jpg">
+      <source src="IMG_2718.mov" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>`;
+});
+
+
+        // Gallery item clicks
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const overlay = item.querySelector('.gallery-overlay');
+                alert(`${overlay.textContent} gallery coming soon! 📸✨`);
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    // Footer fade in animation
+    function handleFooterAnimation() {
+            const footer = document.querySelector('.footer');
+            const footerPosition = footer.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            
+            if (footerPosition <= windowHeight * 0.8) {
+                footer.classList.add('visible');
+            }
+        }
+
+        // Check footer visibility on scroll
+        window.addEventListener('scroll', handleFooterAnimation);
+        
+        // Check on page load
+        window.addEventListener('load', handleFooterAnimation);
+
+        // Scroll to Top functionality
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+
+        function handleScrollToTop() {
+            // Show/hide button based on scroll position
+            if (window.scrollY > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        }
+
+        document.querySelectorAll('.gallery-item').forEach(item => {
+        const v = item.querySelector('video.gallery-video');
+        if (!v) return;
+
+        item.addEventListener('mouseenter', () => {
+            // ensure it can autoplay: must be muted (you already set muted)
+            v.play().catch(()=>{ /* ignore autoplay errors */ });
+        });
+
+        item.addEventListener('mouseleave', () => {
+            v.pause();
+            v.currentTime = 0; // reset to first frame
+        });
+        });
+
+        // Scroll to top when button is clicked
+        scrollToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Add scroll event listener
+        window.addEventListener('scroll', handleScrollToTop);
+
+        // Check on page load
+        window.addEventListener('load', handleScrollToTop);
+    </script>
+</body>
+</html>
